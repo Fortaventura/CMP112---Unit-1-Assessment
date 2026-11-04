@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e19323e92f2b9624598e4e9ef88ab9db
+guid: ae975df171100d14f9b8d7a03becbe88
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -36,7 +36,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 100
+    spritePixelsToUnits: 32
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -72,7 +72,7 @@ ScriptedImporter:
     textureFormatSet: 0
     applyGammaDecoding: 0
   previousAsepriteImporterSettings:
-    fileImportMode: 1
+    fileImportMode: 0
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
@@ -87,7 +87,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   asepriteImporterSettings:
-    fileImportMode: 1
+    fileImportMode: 0
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
@@ -101,7 +101,7 @@ ScriptedImporter:
     addShadowCasters: 0
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 639294075363798424
   singleSpriteImportData:
   - name: 
     originalName: 
@@ -125,9 +125,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Frame_0
+  - name: StickFigure_SpriteSheet
     originalName: 
-    pivot: {x: 0.6, y: -0.6923077}
+    pivot: {x: 0.48837212, y: -0.022222225}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -135,9 +135,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 5
-      height: 13
-    spriteID: 0541f60be7b4187448e62cfa5946b10f
+      width: 43
+      height: 45
+    spriteID: d91cad5fd06c31d4485aac78fed60116
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -146,19 +146,20 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Frame_1
+  spriteSheetImportData:
+  - name: StickFigure_SpriteSheet_0
     originalName: 
-    pivot: {x: 0.6, y: -0.6923077}
-    alignment: 9
+    pivot: {x: 0, y: 0}
+    alignment: 6
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 4
-      y: 25
+      x: 6
+      y: 36
       width: 5
       height: 13
-    spriteID: 686f998292a4b2149a65a396bbf1f9e6
+    spriteID: a97383141ed7e474cab2709c4eee4041
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -166,20 +167,20 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 25}
-  - name: Frame_2
+    uvTransform: {x: 0, y: 0}
+  - name: StickFigure_SpriteSheet_1
     originalName: 
-    pivot: {x: 0.6, y: -0.6923077}
-    alignment: 9
+    pivot: {x: 0, y: 0}
+    alignment: 6
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 4
-      y: 46
+      x: 22
+      y: 36
       width: 5
       height: 13
-    spriteID: 6d88e0858b21aa24eb4523f1c5c7ea9b
+    spriteID: e505650003cf6af44bbdd8382d0fc4c3
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -187,56 +188,166 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 46}
-  spriteSheetImportData: []
+    uvTransform: {x: 0, y: 0}
+  - name: StickFigure_SpriteSheet_2
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 6
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 38
+      y: 36
+      width: 5
+      height: 13
+    spriteID: 2bd168ef28f77fc458f73ff6637de634
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: StickFigure_SpriteSheet_3
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 6
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 18
+      y: 20
+      width: 14
+      height: 13
+    spriteID: d17125b930bb8274c8f4be2bd236f7bd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: StickFigure_SpriteSheet_4
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 6
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 9
+      height: 13
+    spriteID: 70a79763089838c47ac5b8d7b94736a7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: StickFigure_SpriteSheet_5
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 6
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 21
+      y: 4
+      width: 10
+      height: 13
+    spriteID: f6b51626ad6b1ce4994c5033cd1929ec
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: StickFigure_SpriteSheet_6
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 6
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 35
+      y: 4
+      width: 12
+      height: 13
+    spriteID: ea39ce4925173da4a83708274b110d73
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
   tileSetImportData: []
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 2289318522
+      value0: 2856194245
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: StickFigure_2!
+    name: StickFigure_SpriteSheet
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Frame_0
+    - name: StickFigure_SpriteSheet
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 13
-        y: 9
-        width: 5
-        height: 13
-      spriteId: 0541f60be7b4187448e62cfa5946b10f
-    - name: Frame_1
-      frameIndex: 1
-      additiveSortOrder: 0
-      cellRect:
-        x: 13
-        y: 9
-        width: 5
-        height: 13
-      spriteId: 686f998292a4b2149a65a396bbf1f9e6
-    - name: Frame_2
-      frameIndex: 2
-      additiveSortOrder: 0
-      cellRect:
-        x: 13
-        y: 9
-        width: 5
-        height: 13
-      spriteId: 6d88e0858b21aa24eb4523f1c5c7ea9b
+        x: 3
+        y: 1
+        width: 43
+        height: 45
+      spriteId: d91cad5fd06c31d4485aac78fed60116
     linkedCells: []
     tileCells: []
     tileSetIndex: 0
     parentIndex: -1
   tileSets: []
-  platformSettings: []
-  generatePhysicsShape: 0
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  generatePhysicsShape: 1
   secondarySpriteTextures: []
-  previousTextureSize: {x: 32, y: 64}
-  canvasSize: {x: 32, y: 32}
+  previousTextureSize: {x: 64, y: 64}
+  canvasSize: {x: 48, y: 48}
