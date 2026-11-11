@@ -101,7 +101,7 @@ ScriptedImporter:
     addShadowCasters: 0
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
-  platformSettingsDirtyTick: 639294075363798424
+  platformSettingsDirtyTick: 639300082958720391
   singleSpriteImportData:
   - name: 
     originalName: 
@@ -127,7 +127,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: StickFigure_SpriteSheet
     originalName: 
-    pivot: {x: 0.48837212, y: -0.022222225}
+    pivot: {x: 0.47674423, y: -0.022222225}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -135,9 +135,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 43
-      height: 45
-    spriteID: d91cad5fd06c31d4485aac78fed60116
+      width: 86
+      height: 90
+    spriteID: bb68a15c69904064e84936ac02d0d8b9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -149,17 +149,17 @@ ScriptedImporter:
   spriteSheetImportData:
   - name: StickFigure_SpriteSheet_0
     originalName: 
-    pivot: {x: 0, y: 0}
-    alignment: 6
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 6
-      y: 36
-      width: 5
-      height: 13
-    spriteID: a97383141ed7e474cab2709c4eee4041
+      x: 9
+      y: 68
+      width: 7
+      height: 26
+    spriteID: abefca69c9fcf6c4ab456532251d0a2b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -170,17 +170,17 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   - name: StickFigure_SpriteSheet_1
     originalName: 
-    pivot: {x: 0, y: 0}
-    alignment: 6
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 22
-      y: 36
-      width: 5
-      height: 13
-    spriteID: e505650003cf6af44bbdd8382d0fc4c3
+      x: 41
+      y: 68
+      width: 7
+      height: 26
+    spriteID: 80dcca36ebbc1b644aba5e4ded277aa9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -191,17 +191,17 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   - name: StickFigure_SpriteSheet_2
     originalName: 
-    pivot: {x: 0, y: 0}
-    alignment: 6
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 38
-      y: 36
-      width: 5
-      height: 13
-    spriteID: 2bd168ef28f77fc458f73ff6637de634
+      x: 74
+      y: 68
+      width: 7
+      height: 26
+    spriteID: 9a3fb80189acf854facb0e1b59c95e20
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -212,17 +212,17 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   - name: StickFigure_SpriteSheet_3
     originalName: 
-    pivot: {x: 0, y: 0}
-    alignment: 6
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 18
-      y: 20
-      width: 14
-      height: 13
-    spriteID: d17125b930bb8274c8f4be2bd236f7bd
+      x: 30
+      y: 36
+      width: 26
+      height: 26
+    spriteID: a5cdb07c27323ec408837361970131df
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -233,17 +233,17 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   - name: StickFigure_SpriteSheet_4
     originalName: 
-    pivot: {x: 0, y: 0}
-    alignment: 6
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 4
-      y: 4
-      width: 9
-      height: 13
-    spriteID: 70a79763089838c47ac5b8d7b94736a7
+      x: 61
+      y: 36
+      width: 29
+      height: 26
+    spriteID: 6e615099c1c97d34d9e3338608fcc8aa
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -254,17 +254,17 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   - name: StickFigure_SpriteSheet_5
     originalName: 
-    pivot: {x: 0, y: 0}
-    alignment: 6
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 21
+      x: 4
       y: 4
-      width: 10
-      height: 13
-    spriteID: f6b51626ad6b1ce4994c5033cd1929ec
+      width: 17
+      height: 26
+    spriteID: 9a741697786d1734496175c8d22c5d98
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -275,17 +275,38 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   - name: StickFigure_SpriteSheet_6
     originalName: 
-    pivot: {x: 0, y: 0}
-    alignment: 6
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 35
+      x: 36
       y: 4
-      width: 12
-      height: 13
-    spriteID: ea39ce4925173da4a83708274b110d73
+      width: 19
+      height: 26
+    spriteID: 2780857e5c5d58d418aa95ab5ca40337
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: StickFigure_SpriteSheet_7
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 66
+      y: 4
+      width: 21
+      height: 27
+    spriteID: 6374e5d5a4c6238448f3364a05ae0c19
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -312,11 +333,11 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 3
-        y: 1
-        width: 43
-        height: 45
-      spriteId: d91cad5fd06c31d4485aac78fed60116
+        x: 7
+        y: 2
+        width: 86
+        height: 90
+      spriteId: bb68a15c69904064e84936ac02d0d8b9
     linkedCells: []
     tileCells: []
     tileSetIndex: 0
@@ -347,7 +368,7 @@ ScriptedImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
-  generatePhysicsShape: 1
+  generatePhysicsShape: 0
   secondarySpriteTextures: []
-  previousTextureSize: {x: 64, y: 64}
-  canvasSize: {x: 48, y: 48}
+  previousTextureSize: {x: 128, y: 128}
+  canvasSize: {x: 96, y: 96}
