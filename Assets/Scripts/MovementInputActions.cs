@@ -100,6 +100,15 @@ public partial class @MovementInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jumping"",
+                    ""type"": ""Button"",
+                    ""id"": ""9692cb8c-11ad-4629-8df6-d614cef43e38"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -157,6 +166,39 @@ public partial class @MovementInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbc7d7e8-2298-492d-a680-5c2c59665447"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jumping"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45cc56a7-c88f-429a-9e02-e04df4ae4bbd"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jumping"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d00d4e2-8d0a-4ba1-81a4-60784b7856aa"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jumping"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -166,6 +208,7 @@ public partial class @MovementInputActions: IInputActionCollection2, IDisposable
         // Moving
         m_Moving = asset.FindActionMap("Moving", throwIfNotFound: true);
         m_Moving_Movement = m_Moving.FindAction("Movement", throwIfNotFound: true);
+        m_Moving_Jumping = m_Moving.FindAction("Jumping", throwIfNotFound: true);
     }
 
     ~@MovementInputActions()
@@ -247,6 +290,7 @@ public partial class @MovementInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Moving;
     private List<IMovingActions> m_MovingActionsCallbackInterfaces = new List<IMovingActions>();
     private readonly InputAction m_Moving_Movement;
+    private readonly InputAction m_Moving_Jumping;
     /// <summary>
     /// Provides access to input actions defined in input action map "Moving".
     /// </summary>
@@ -262,6 +306,10 @@ public partial class @MovementInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Moving/Movement".
         /// </summary>
         public InputAction @Movement => m_Wrapper.m_Moving_Movement;
+        /// <summary>
+        /// Provides access to the underlying input action "Moving/Jumping".
+        /// </summary>
+        public InputAction @Jumping => m_Wrapper.m_Moving_Jumping;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -291,6 +339,9 @@ public partial class @MovementInputActions: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @Jumping.started += instance.OnJumping;
+            @Jumping.performed += instance.OnJumping;
+            @Jumping.canceled += instance.OnJumping;
         }
 
         /// <summary>
@@ -305,6 +356,9 @@ public partial class @MovementInputActions: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @Jumping.started -= instance.OnJumping;
+            @Jumping.performed -= instance.OnJumping;
+            @Jumping.canceled -= instance.OnJumping;
         }
 
         /// <summary>
@@ -352,5 +406,12 @@ public partial class @MovementInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMovement(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Jumping" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnJumping(InputAction.CallbackContext context);
     }
 }
