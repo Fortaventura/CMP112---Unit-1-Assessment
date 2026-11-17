@@ -34,25 +34,26 @@ public class PlayerMovement : MonoBehaviour
         MovementInputActions.Moving.Jumping.performed += OnJump;
     }
 
+
+    //Enabling (and disabling) the custom keybinds for movement
     private void OnEnable()
     {
         MovementInputActions.Enable();
     }
-    /*
     private void OnDisable()
     {
         MovementInputActions.Disable();
     }
-    */
+    
+
     void Update()
     {
         movement = MovementInputActions.Moving.Movement.ReadValue<Vector2>();
        
-        
-        if (Input.GetButtonDown("Jump")) 
+        if (Input.GetButtonDown("Jump") && OnGround()) 
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
-            Debug.Log("I'm Jumping");
+            
         }
 
 /*
@@ -89,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool OnGround()
     {
-        RaycastHit2D RayDetect = Physics2D.Raycast(transform.position,Vector2.down, 0.1f, 1 << 6);
+        RaycastHit2D RayDetect = Physics2D.Raycast(transform.position,Vector2.down, 0.6f, 1 << 6);
 
         Debug.DrawRay(transform.position, Vector2.down);
 
