@@ -1,57 +1,70 @@
-
-using System.Numerics;
+//using System.Numerics;
+//using System.Numerics;
+//using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    public float speed = 0;
+    //The following code was drawn from the movement tutorial: https://www.youtube.com/watch?v=2wqgBhnsL28
+ 
+    [SerializeField] private float  speed = 4f;
+    private MovementInputActions MovementInputActions;
+    private Vector2 movement;
 
+    private Rigidbody2D rb;
+    public int stillness = 0;
     public int JumpForce;
     public float boostSpeed = 120;
 
     void Awake()
     {
+        MovementInputActions = new MovementInputActions();
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
-/*
-    void OnMovement (InputValue movementValue)
-    {
-        Vector2 moveVector = moveValue.Get<Vector2>();
 
-        movementX = movementVector.x;
-        movementY = movementVector.y;
+    private void OnEnable()
+    {
+        MovementInputActions.Enable();
     }
-*/
-    
-    private void FixedUpdate()
+    /*
+    private void OnDisable()
     {
-        if (Input.GetKey(Keycode.Space) || Input.GetKey(Keycode.UpArrow))
+        MovementInputActions.Disable();
+    }
+    */
+    void Update()
+    {
+        movement = MovementInputActions.Moving.Movement.ReadValue<Vector2>();
+       
+        /*
+        if (Input.GetButtonDown("Leap")) 
         {
-            rb.AddForce(Vector2.Vertical * JumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
         }
 
 
-
-
-
-
-
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetButtonDown("Left"))
         {
-            rb.velocity = new Vector2 (speed, rb, velocity.y);
-
+            rb.linearVelocity = new Vector2(rb.linearVelocity.y, speed);
         }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetButtonDown("Right"))
         {
-            rb.velocity = new Vector2 (speed, rb, velocity.y);
-
+            rb.linearVelocity = new Vector2(rb.linearVelocity.y,-speed);
         }
         else
         {
-            rb.velocity = 0; //new Vector2 (speed, rb, velocity.y);
-        }
+            rb.linearVelocity = new Vector2(rb.linearVelocity.y, stillness);
+        }*/
+        
+    }
 
+    
+
+    private void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime) ;
+        Debug.Log(movement.x);
     }
 /*
     private void OnCollisionEnter2D(Collision2D collision)
@@ -82,4 +95,6 @@ public class PlayerMovement : MonoBehaviour
 
 */
 }
+
+
 
