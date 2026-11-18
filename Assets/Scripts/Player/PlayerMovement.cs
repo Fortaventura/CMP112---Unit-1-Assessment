@@ -12,30 +12,42 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //Some of the following code was drawn from the movement tutorial: https://www.youtube.com/watch?v=2wqgBhnsL28
- 
-    [SerializeField] private float  speed = 4f;
+    //Some of the following code (the 'Movement Input Actions') was drawn from the movement tutorial: https://www.youtube.com/watch?v=2wqgBhnsL28, though the majority was adapted from the vectors lab exercises
+
+    //This creates a class of a new input, that is defined in the scripts folder and enables movement with 'A' and 'D' and jumping with space
     private MovementInputActions MovementInputActions;
+
+    //Defining a 2D vector for movement
     private Vector2 movement;
-    //Any code involving the above variables was derived from the above video, in addition to the movementInputActions object in the scripts folder
+    
 
-
+    //creating a rigidbody component for the player sprite
     private Rigidbody2D rb;
-    //public int stillness = 0;
-    [SerializeField] private float JumpForce = 5f;
 
+    public int stillness = 0; //This was intended to be used for friction to gradually slow down the player. But it's scope creep :/
+
+    //Defining the speed of the player and how high they can jump
+    [SerializeField] private float JumpForce = 5f;
+    [SerializeField] private float  speed = 4f;
+
+    //This creates a new mask for the ground, that is used to prevent in-air jumping using raycasting later on.
     [SerializeField] private LayerMask groundMask;
     public float boostSpeed = 120;
 
     void Awake()
     {
+        //Creates an object so that the new inputs can be referred to.
         MovementInputActions = new MovementInputActions();
-        rb = gameObject.GetComponent<Rigidbody2D>();
+
+        //Defines the rigidbody(2D) component for the player
+        rb = gameObject.GetComponent<Rigidbody2D>();    
+
+        //Adds the path of inputs for jumping, so that the inputs are accepted
         MovementInputActions.Moving.Jumping.performed += OnJump;
     }
 
 
-    //Enabling (and disabling) the custom keybinds for movement
+    //Enabling (and disabling) the custom keybinds for movement and jumping
     private void OnEnable()
     {
         MovementInputActions.Enable();
@@ -46,12 +58,14 @@ public class PlayerMovement : MonoBehaviour
     }
     
 
-    void Update()
+
+    void Update()   //Gets the player movement value (left, right or null) from the added input paths, and detects jump inputs
     {
         movement = MovementInputActions.Moving.Movement.ReadValue<Vector2>();
        
         if (Input.GetButtonDown("Jump") && OnGround()) 
         {
+            //The jump input is ONLY performed if the player is on the ground when the input is detected. This is checked through the OnGround function (Line 105)
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
             
         }
@@ -83,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (OnGround())
         {
+            //If the raycaster does detect an object of the ground class, then increase the vertical player velocity by the jumpforce
            rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce); 
         }
         
@@ -90,10 +105,12 @@ public class PlayerMovement : MonoBehaviour
 
     private bool OnGround()
     {
+        //This makes a new 2d raycast object at the center of the player, and points it down. The radius (0.6) extends barely beyond the player sprite and only detects objects of layer 6 (all ground tiles are this layer)
         RaycastHit2D RayDetect = Physics2D.Raycast(transform.position,Vector2.down, 0.6f, 1 << 6);
 
         Debug.DrawRay(transform.position, Vector2.down);
 
+        //If ground is detected, return true, else false
         if (RayDetect.collider != null)
         {
             return true;
@@ -106,14 +123,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-/*
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Boost"))
+
+        if (collision.gameObject.CompareTag("Spike"))
         {
             //Destroy(gameObject);
 
-            speed = 120;
+            //levelManager.resetlevel;
         }
         else if (collision.gameObject.CompareTag("Spike"))
         {
@@ -123,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
             
         }
     }
-*/
+
 }
 
 

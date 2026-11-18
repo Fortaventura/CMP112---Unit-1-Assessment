@@ -1,4 +1,5 @@
 /*
+using System.Diagnostics;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -16,6 +17,7 @@ public class LevelManager : MonoBehaviour
 
     }
 
+/*
     public void LoadLevel(int level)
     {
         this.level = level;
@@ -42,7 +44,8 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         
-    }
 }
+    }*/
 
-*/
+
+
