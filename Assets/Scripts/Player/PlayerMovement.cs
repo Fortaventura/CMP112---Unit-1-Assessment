@@ -6,6 +6,7 @@
 //using System.Numerics;
 //using System.Diagnostics;
 //using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -36,7 +37,10 @@ public class PlayerMovement : MonoBehaviour
 
     //These control how much the dash multiplies the player's speed, and their most recent direction (Positive for right, negative for left).
     public float boostSpeed = 120f;
-    public float savedDirection = 1;
+    [HideInInspector] public float savedDirection = 1;
+
+    public GameObject Spikes { get; }
+    public GameObject Boost { get; }
 
     void Awake()
     {
@@ -96,9 +100,8 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector2(movement.x * speed, rb.linearVelocity.y);
         if (movement.x != 0)
         { //Saves whether the player was most recently koving left or right so that the dash powerups send them in the correct direction.
-            savedDirection = movement.x; 
+            savedDirection = movement.x;
         }
-        
     }
 
     private void OnJump(InputAction.CallbackContext context)
@@ -108,7 +111,6 @@ public class PlayerMovement : MonoBehaviour
             //If the raycaster does detect an object of the ground class, then increase the vertical player velocity by the jumpforce
            rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce); 
         }
-        
     }
 
     private bool OnGround()
@@ -127,34 +129,25 @@ public class PlayerMovement : MonoBehaviour
         {
             return false;
         }
-
     }
-
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        if (collision.gameObject.CompareTag("Spikes"))
+        if (collision.gameObject.tag == "Spikes")
         {
             //Destroy(this.gameObject);
 
             //levelManager.resetlevel;
         }
-        else if (collision.gameObject.CompareTag("Spikes"))
-        {
-            //Play the death animation
+    }
 
-            //Levelmanager.resetlevel();
-
-        }
-        else if (collision.gameObject.CompareTag("Boost"))
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // save Y position.
+        if (collision.gameObject.tag == "Boost")
         {
-            Debug.Log("Boosted");
             rb.linearVelocity = new Vector2(savedDirection * boostSpeed, rb.linearVelocity.y);
         }
     }
 }
-
-
-
