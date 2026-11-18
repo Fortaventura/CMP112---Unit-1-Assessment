@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Spike"))
         {
-            //Destroy(gameObject);
+            //Destroy(this.gameObject);
 
             //levelManager.resetlevel;
         }

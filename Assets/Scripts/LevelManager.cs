@@ -1,9 +1,11 @@
-/*
+
 using System.Diagnostics;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    private ClickDetection ClickDetection;
+
     public int Level = 1;
 
     void Start()
@@ -13,22 +15,28 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameobject);
+        //DontDestroyOnLoad(this.gameobject);
 
     }
 
-/*
+
     public void LoadLevel(int level)
     {
-        this.level = level;
+        //this.level = level;
 
         if (level > 2)
         {
-            LevelManager.LoadScene("WinScreen");
+            //LevelManager.LoadScene("WinScreen");
         }   else 
         {   
-            LevelManager.LoadScene("Level" + level);
+            //LevelManager.LoadScene("Level" + level);
         }
+
+        /*
+        public TMP_Text scoreText;
+        public TMP_Text livesText;
+
+        */
         
         
 
@@ -45,7 +53,7 @@ public class LevelManager : MonoBehaviour
     {
         
 }
-    }*/
+    }
 
 
 

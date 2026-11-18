@@ -589,7 +589,7 @@ GameObject:
   - component: {fileID: 26912100}
   - component: {fileID: 26912099}
   m_Layer: 5
-  m_Name: Win Message
+  m_Name: WinMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10025,6 +10025,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9201a49963fbe469bb56b5a13fd125d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  DeathMessage: {fileID: 0}
+  WinMessage: {fileID: 0}
+  retryButton: {fileID: 0}
 --- !u!1001 &893354471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20528,6 +20531,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9201a49963fbe469bb56b5a13fd125d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClickDetection
+  DeathMessage: {fileID: 0}
+  WinMessage: {fileID: 0}
+  retryButton: {fileID: 0}
 --- !u!1 &1641364365 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2253911629886400664, guid: 78f6d9edd43e94657aba63147929be3c, type: 3}

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ClickDetection : MonoBehaviour
 {
+    LevelManager LevelManager;
 
     public GameObject DeathMessage;
     public GameObject WinMessage;
@@ -23,6 +24,9 @@ public class ClickDetection : MonoBehaviour
         DeathMessage.SetActive(false);
         WinMessage.SetActive(false);
         retryButton.SetActive(false);
+
+        //Reset pakyerpos
+        
 
        
         /*
