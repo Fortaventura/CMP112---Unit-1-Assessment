@@ -7,6 +7,7 @@
 //using System.Diagnostics;
 //using System.Numerics;
 using System.Xml.Serialization;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,11 +29,14 @@ public class PlayerMovement : MonoBehaviour
 
     //Defining the speed of the player and how high they can jump
     [SerializeField] private float JumpForce = 5f;
-    [SerializeField] private float  speed = 4f;
+    [SerializeField] private float speed = 4f;
 
     //This creates a new mask for the ground, that is used to prevent in-air jumping using raycasting later on.
     [SerializeField] private LayerMask groundMask;
-    public float boostSpeed = 120;
+
+    //These control how much the dash multiplies the player's speed, and their most recent direction (Positive for right, negative for left).
+    public float boostSpeed = 120f;
+    public float savedDirection = 1;
 
     void Awake()
     {
@@ -89,7 +93,11 @@ public class PlayerMovement : MonoBehaviour
     
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(movement.x * speed, rb.linearVelocity.y) ;
+        rb.linearVelocity = new Vector2(movement.x * speed, rb.linearVelocity.y);
+        if (movement.x != 0)
+        { //Saves whether the player was most recently koving left or right so that the dash powerups send them in the correct direction.
+            savedDirection = movement.x; 
+        }
         
     }
 
@@ -127,21 +135,25 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject.CompareTag("Spike"))
+        if (collision.gameObject.CompareTag("Spikes"))
         {
             //Destroy(this.gameObject);
 
             //levelManager.resetlevel;
         }
-        else if (collision.gameObject.CompareTag("Spike"))
+        else if (collision.gameObject.CompareTag("Spikes"))
         {
             //Play the death animation
 
             //Levelmanager.resetlevel();
-            
+
+        }
+        else if (collision.gameObject.CompareTag("Boost"))
+        {
+            Debug.Log("Boosted");
+            rb.linearVelocity = new Vector2(savedDirection * boostSpeed, rb.linearVelocity.y);
         }
     }
-
 }
 
 
