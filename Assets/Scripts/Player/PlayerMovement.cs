@@ -1,13 +1,8 @@
 //using System.Numerics;
-//using System.Numerics;
 //using System.Diagnostics;
-//using System.Diagnostics;
-//using System.Numerics;
-//using System.Numerics;
-//using System.Diagnostics;
-//using System.Numerics;
-
+using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,9 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     //Defining a 2D vector for movement
     private Vector2 movement;
-    
 
-    //creating a rigidbody component for the player sprite
+    //Creating a rigidbody component for the player sprite.
     private Rigidbody2D rb;
 
     public int stillness = 0; //This was intended to be used for friction to gradually slow down the player. But it's scope creep :/
@@ -36,12 +30,14 @@ public class PlayerMovement : MonoBehaviour
 
     //This creates a new mask for the ground, that is used to prevent in-air jumping using raycasting later on.
     [SerializeField] private LayerMask groundMask;
-    public float boostSpeed = 120;
+
+    //These control how much the dash multiplies the player's speed, whether their position updates, & their most recent direction (positive->, negative<-).
+    public float boostSpeed = 120f;
+    [HideInInspector] public bool dashing = false;
+    [HideInInspector] public float savedDirection = 1;
 
     void Awake()
     {
-
-    
         DontDestroyOnLoad(this.gameObject);
     
         //Creates an object so that the new inputs can be referred to.
@@ -69,19 +65,23 @@ public class PlayerMovement : MonoBehaviour
     {
         movement = MovementInputActions.Moving.Movement.ReadValue<Vector2>();
        
-        if (Input.GetButtonDown("Jump") && OnGround()) 
-        {
-            //The jump input is ONLY performed if the player is on the ground when the input is detected. This is checked through the OnGround function (Line 105)
+        if (Input.GetButtonDown("Jump") && OnGround())
+        { //The jump input is ONLY performed if the player is on the ground when the input is detected. This is checked through the OnGround function (Line 105)
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
-            
         }
-        
     }
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(movement.x * speed, rb.linearVelocity.y) ;
+        if (!dashing) //Stops the player's velocity from updating while dashing.
+        {
+            rb.linearVelocity = new Vector2(movement.x * speed, rb.linearVelocity.y);
+        }
         
+        if (movement.x != 0)
+        { //Saves whether the player was most recently moving left or right.
+            savedDirection = movement.x; //For moving in the correct direction for dashing, (+ OnGround() raycasts[to do]).
+        }
     }
 
     private void OnJump(InputAction.CallbackContext context)
@@ -91,13 +91,12 @@ public class PlayerMovement : MonoBehaviour
             //If the raycaster does detect an object of the ground class, then increase the vertical player velocity by the jumpforce
            rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce); 
         }
-        
     }
 
     private bool OnGround()
     {
         //This makes a new 2d raycast object at the center of the player, and points it down. The radius (0.6) extends barely beyond the player sprite and only detects objects of layer 6 (all ground tiles are this layer)
-        RaycastHit2D RayDetect = Physics2D.Raycast(transform.position,Vector2.down, 0.6f, 1 << 6);
+        RaycastHit2D RayDetect = Physics2D.Raycast(transform.position, Vector2.down, 0.6f, 1 << 6);
 
         Debug.DrawRay(transform.position, Vector2.down);
 
@@ -110,10 +109,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return false;
         }
-
     }
-
- 
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -121,13 +117,15 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Spikes"))
         {
             LevelManager.Died();
-
-            
         }
         else if (collision.gameObject.CompareTag("Boost"))
         {
-            
-            
+            rb.linearVelocity = new Vector2(savedDirection * boostSpeed, rb.linearVelocity.y);
+            rb.gravityScale = 0f;
+            dashing = true;
+            new WaitForSeconds(500f);
+            rb.gravityScale = 3f;
+            dashing = false;
         }
         else if (collision.gameObject.CompareTag("Door"))
         {
@@ -135,7 +133,6 @@ public class PlayerMovement : MonoBehaviour
             //LevelManager.LoadNextLevel();
         }
     }
-
 }
 
 
