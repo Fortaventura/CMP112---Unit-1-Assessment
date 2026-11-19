@@ -6,6 +6,7 @@
 //using System.Numerics;
 //using System.Diagnostics;
 //using System.Numerics;
+
 using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     //Some of the following code (the 'Movement Input Actions') was drawn from the movement tutorial: https://www.youtube.com/watch?v=2wqgBhnsL28, though the majority was adapted from the vectors lab exercises
 
     //This creates a class of a new input, that is defined in the scripts folder and enables movement with 'A' and 'D' and jumping with space
+
+    public GameOverScript gameOverScript;
+    public LevelManager LevelManager;
     private MovementInputActions MovementInputActions;
 
     //Defining a 2D vector for movement
@@ -36,6 +40,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
+
+    
+        DontDestroyOnLoad(this.gameObject);
+    
         //Creates an object so that the new inputs can be referred to.
         MovementInputActions = new MovementInputActions();
 
@@ -56,8 +64,6 @@ public class PlayerMovement : MonoBehaviour
     {
         MovementInputActions.Disable();
     }
-    
-
 
     void Update()   //Gets the player movement value (left, right or null) from the added input paths, and detects jump inputs
     {
@@ -69,24 +75,9 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
             
         }
-
-/*
-        if (Input.GetButtonDown("Left"))
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.y, speed);
-        }
-        else if (Input.GetButtonDown("Right"))
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.y,-speed);
-        }
-        else
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.y, stillness);
-        }*/
         
     }
 
-    
     private void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(movement.x * speed, rb.linearVelocity.y) ;
@@ -122,23 +113,26 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+ 
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject.CompareTag("Spike"))
+        if (collision.gameObject.CompareTag("Spikes"))
         {
-            //Destroy(this.gameObject);
+            LevelManager.Died();
 
-            //levelManager.resetlevel;
-        }
-        else if (collision.gameObject.CompareTag("Spike"))
-        {
-            //Play the death animation
-
-            //Levelmanager.resetlevel();
             
+        }
+        else if (collision.gameObject.CompareTag("Boost"))
+        {
+            
+            
+        }
+        else if (collision.gameObject.CompareTag("Door"))
+        {
+            LevelManager.Completed();
+            //LevelManager.LoadNextLevel();
         }
     }
 

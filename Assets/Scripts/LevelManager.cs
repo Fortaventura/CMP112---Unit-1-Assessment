@@ -1,59 +1,70 @@
-
-using System.Diagnostics;
+//using System.Diagnostics;
+//using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
+//using System.Numerics;
 
 public class LevelManager : MonoBehaviour
 {
-    private ClickDetection ClickDetection;
+    public GameOverScript gameOverScript;
+    public GameObject Player;
 
-    public int Level = 1;
+    public int level = 1;
 
-    void Start()
-    {
-        
-    }
+     
+    //private new Vector2 startPos2 = (11,-6);
+
 
     private void Awake()
     {
-        //DontDestroyOnLoad(this.gameobject);
+        DontDestroyOnLoad(this.gameObject);
 
+        LoadLevel(1);
     }
 
+    public void retryLevel()
+    {
+        LoadLevel(level);
+    }
 
     public void LoadLevel(int level)
     {
-        //this.level = level;
-
-        if (level > 2)
+        if (level == 1)
         {
-            //LevelManager.LoadScene("WinScreen");
-        }   else 
-        {   
-            //LevelManager.LoadScene("Level" + level);
+        Player.transform.position = new Vector2 (-10, -7);
         }
+        else
+        {
+         Player.transform.position = new Vector2 (11, -6);   
+        }
+        gameOverScript.hide();
+        Time.timeScale = 1.0f;
 
-        /*
-        public TMP_Text scoreText;
-        public TMP_Text livesText;
+        SceneManager.LoadScene("Level" + level);
 
-        */
-        
-        
 
     }
 
-
-    public void LoadScene()
+    public void LoadNextLevel()
     {
-        int number = 0;
-        number++;
+        SceneManager.LoadScene("Level" + (level + 1));
     }
-    // Update is called once per frame
-    void Update()
+    
+    public void Died()
     {
-        
+        gameOverScript.setup_died();
+        Time.timeScale = 0.0f;
+    }
+
+    public void Completed()
+    {
+        level ++;
+        Debug.Log("End reached!");
+        gameOverScript.setup_win();
+        Time.timeScale = 0.0f;   
+    }
+
+    
 }
-    }
-
-
-

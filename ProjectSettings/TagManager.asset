@@ -7,6 +7,9 @@ TagManager:
   - Boost
   - Ground
   - Spikes
+  - deathMessage
+  - winMessage
+  - Door
   layers:
   - Default
   - TransparentFX
