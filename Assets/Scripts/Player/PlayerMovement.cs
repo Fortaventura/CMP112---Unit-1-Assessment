@@ -7,6 +7,7 @@
 //using System.Diagnostics;
 //using System.Numerics;
 
+//using System.Diagnostics;
 using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -126,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Boost"))
         {
-            
+            Debug.Log("You've hit a boost");
             
         }
         else if (collision.gameObject.CompareTag("Door"))
