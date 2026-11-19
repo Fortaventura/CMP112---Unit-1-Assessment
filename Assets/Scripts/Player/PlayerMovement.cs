@@ -35,8 +35,9 @@ public class PlayerMovement : MonoBehaviour
     //This creates a new mask for the ground, that is used to prevent in-air jumping using raycasting later on.
     [SerializeField] private LayerMask groundMask;
 
-    //These control how much the dash multiplies the player's speed, and their most recent direction (Positive for right, negative for left).
+    //These control how much the dash multiplies the player's speed, whether their position updates, & their most recent direction (Positive for right, negative for left).
     public float boostSpeed = 120f;
+    [HideInInspector] public bool dashing = false;
     [HideInInspector] public float savedDirection = 1;
 
     public GameObject Spikes { get; }
@@ -97,10 +98,14 @@ public class PlayerMovement : MonoBehaviour
     
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(movement.x * speed, rb.linearVelocity.y);
+        if (!dashing) //Stops the player's velocity from updating while dashing.
+        {
+            rb.linearVelocity = new Vector2(movement.x * speed, rb.linearVelocity.y);
+        }
+
         if (movement.x != 0)
-        { //Saves whether the player was most recently koving left or right so that the dash powerups send them in the correct direction.
-            savedDirection = movement.x;
+        { //Saves whether the player was most recently moving left or right.
+            savedDirection = movement.x; // For moving in the correct direction for dashing, plus ground raycasts.
         }
     }
 
@@ -116,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
     private bool OnGround()
     {
         //This makes a new 2d raycast object at the center of the player, and points it down. The radius (0.6) extends barely beyond the player sprite and only detects objects of layer 6 (all ground tiles are this layer)
-        RaycastHit2D RayDetect = Physics2D.Raycast(transform.position,Vector2.down, 0.6f, 1 << 6);
+        RaycastHit2D RayDetect = Physics2D.Raycast(transform.position, Vector2.down, 0.6f, 1 << 6);
 
         Debug.DrawRay(transform.position, Vector2.down);
 
@@ -144,10 +149,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // save Y position.
         if (collision.gameObject.tag == "Boost")
         {
             rb.linearVelocity = new Vector2(savedDirection * boostSpeed, rb.linearVelocity.y);
+            rb.gravityScale = 0f;
+            dashing = true;
+            new WaitForSeconds(500f);
+            rb.gravityScale = 3f;
+            dashing = false;
         }
     }
 }
