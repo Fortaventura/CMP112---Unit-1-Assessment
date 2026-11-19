@@ -1,5 +1,6 @@
 //using System.Numerics;
 //using System.Diagnostics;
+using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 using UnityEditor.Experimental.GraphView;
@@ -26,13 +27,13 @@ public class PlayerMovement : MonoBehaviour
 
     //Defining the speed of the player and how high they can jump
     [SerializeField] private float JumpForce = 5f;
-    [SerializeField] private float  speed = 4f;
+    [SerializeField] private float speed = 4f;
 
     //This creates a new mask for the ground, that is used to prevent in-air jumping using raycasting later on.
     [SerializeField] private LayerMask groundMask;
 
     //These control how much the dash multiplies the player's speed, whether their position updates, & their most recent direction (positive->, negative<-).
-    public float boostSpeed = 120f;
+    public float boostSpeed = 50f;
     [HideInInspector] public bool dashing = false;
     [HideInInspector] public float savedDirection = 1;
 
@@ -118,20 +119,31 @@ public class PlayerMovement : MonoBehaviour
         {
             LevelManager.Died();
         }
-        else if (collision.gameObject.CompareTag("Boost"))
-        {
-            rb.linearVelocity = new Vector2(savedDirection * boostSpeed, rb.linearVelocity.y);
-            rb.gravityScale = 0f;
-            dashing = true;
-            new WaitForSeconds(500f);
-            rb.gravityScale = 3f;
-            dashing = false;
-        }
         else if (collision.gameObject.CompareTag("Door"))
         {
             LevelManager.Completed();
             //LevelManager.LoadNextLevel();
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Boost")
+        {
+            rb.gravityScale = 0f;
+            rb.linearVelocity = new Vector2(0, 0);
+            //MovementInputActions.Disable();
+            rb.linearVelocity = new Vector2(savedDirection * boostSpeed, rb.linearVelocity.y);
+            dashing = true;
+            StartCoroutine("Wait");
+            rb.gravityScale = 3f;
+            dashing = false;
+        }
+    }
+
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(10f);
     }
 }
 
