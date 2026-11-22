@@ -32,12 +32,13 @@ public class PlayerMovement : MonoBehaviour
     //This creates a new mask for the ground, that is used to prevent in-air jumping using raycasting later on.
     [SerializeField] private LayerMask groundMask;
 
-    //These control how much the dash multiplies the player's speed, whether their position updates, & their most recent direction (positive->, negative<-).
-    public float boostSpeed = 50f;
+    //These control how much the dash increases the player's speed, the duration of the dash, whether their position updates, & their most recent direction.
+    public float boostSpeed = 1f;
+    public float dashTime = 0.01f;
     [HideInInspector] public bool dashing = false;
-    [HideInInspector] public float savedDirection = 1;
+    [HideInInspector] public float savedDirection = 1; //Positive goes right, negative goes left.
 
-    void Awake()
+void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
     
@@ -67,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         movement = MovementInputActions.Moving.Movement.ReadValue<Vector2>();
        
         if (Input.GetButtonDown("Jump") && OnGround())
-        { //The jump input is ONLY performed if the player is on the ground when the input is detected. This is checked through the OnGround function (Line 105)
+        { //The jump input is ONLY performed if the player is on the ground when the input is detected. This is checked through the OnGround function (Line 97)
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
         }
     }
@@ -77,11 +78,10 @@ public class PlayerMovement : MonoBehaviour
         if (!dashing) //Stops the player's velocity from updating while dashing.
         {
             rb.linearVelocity = new Vector2(movement.x * speed, rb.linearVelocity.y);
-        }
-        
-        if (movement.x != 0)
-        { //Saves whether the player was most recently moving left or right.
-            savedDirection = movement.x; //For moving in the correct direction for dashing, (+ OnGround() raycasts[to do]).
+            if (movement.x != 0)
+            { //Saves whether the player was most recently moving left or right.
+                savedDirection = movement.x; //For moving in the correct direction for dashing.
+            }
         }
     }
 
@@ -128,24 +128,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Boost")
+        if (collision.gameObject.CompareTag("Boost")) //Looking for dash orbs.
         {
-            rb.gravityScale = 0f;
-            rb.linearVelocity = new Vector2(0, 0);
-            //MovementInputActions.Disable();
             rb.linearVelocity = new Vector2(savedDirection * boostSpeed, rb.linearVelocity.y);
-            dashing = true;
-            StartCoroutine("Wait");
-            rb.gravityScale = 3f;
-            dashing = false;
+            dashing = true; //Prevents FixedUpdate from updating the player's velocity while dashing.
+            StartCoroutine(Wait(dashTime));
         }
     }
-
-    private IEnumerator Wait()
+    
+    private IEnumerator Wait(float secs) //Use of IEnumerator gleaned from: https://discussions.unity.com/t/how-waitforseconds-works-in-c/447105/19
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(secs);
+        dashing = false;
     }
 }
-
-
-
