@@ -21,10 +21,10 @@ public class LevelManager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
 
-        LoadLevel(1);
+        LoadLevel(2);
     }
 
-    public void retryLevel()
+    public void RetryLevel()
     {
         LoadLevel(level);
     }
@@ -39,7 +39,7 @@ public class LevelManager : MonoBehaviour
         {
          Player.transform.position = new Vector2 (11, -6);   
         }
-        gameOverScript.hide();
+        gameOverScript.Hide();
         Time.timeScale = 1.0f;
 
         SceneManager.LoadScene("Level" + level);
@@ -54,7 +54,7 @@ public class LevelManager : MonoBehaviour
     
     public void Died()
     {
-        gameOverScript.setup_died();
+        gameOverScript.Setup_died();
         Time.timeScale = 0.0f;
     }
 
@@ -62,7 +62,7 @@ public class LevelManager : MonoBehaviour
     {
         level ++;
         Debug.Log("End reached!");
-        gameOverScript.setup_win();
+        gameOverScript.Setup_win();
         Time.timeScale = 0.0f;   
     }
 

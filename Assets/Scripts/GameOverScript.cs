@@ -18,21 +18,21 @@ public class GameOverScript : MonoBehaviour
     }
     //public LevelManager LevelManager;
 
-    public void setup_died()
+    public void Setup_died()
     {
         deathMessage.SetActive(true);
         winMessage.SetActive(false);
         gameObject.SetActive(true);
     }
 
-    public void setup_win()
+    public void Setup_win()
     {
         deathMessage.SetActive(false);
         winMessage.SetActive(true);
         gameObject.SetActive(true);
     }
 
-    public void hide()
+    public void Hide()
     {
         gameObject.SetActive(false);
     }
@@ -41,7 +41,7 @@ public class GameOverScript : MonoBehaviour
     {
 
         //gameObject.SetActive(false);
-        LevelManager.retryLevel();
+        LevelManager.RetryLevel();
         Debug.Log("This reloads the level");
     }
 }

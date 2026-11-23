@@ -130,7 +130,7 @@ void Awake()
     {
         if (collision.gameObject.CompareTag("Boost")) //Looking for dash orbs.
         {
-            rb.linearVelocity = new Vector2(savedDirection * boostSpeed, rb.linearVelocity.y);
+            rb.linearVelocity += new Vector2(savedDirection * boostSpeed, rb.linearVelocity.y);
             dashing = true; //Prevents FixedUpdate from updating the player's velocity while dashing.
             StartCoroutine(Wait(dashTime));
         }
