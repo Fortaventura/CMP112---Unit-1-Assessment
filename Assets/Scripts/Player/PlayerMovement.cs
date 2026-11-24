@@ -33,9 +33,9 @@ public class PlayerMovement : MonoBehaviour
     //This creates a new mask for the ground, that is used to prevent in-air jumping using raycasting later on.
     [SerializeField] private LayerMask groundMask;
 
-    //These control how much the dash increases the player's speed, the duration of the dash, the gravity prior to being changed, whether their position updates, & their most recent direction.
+    //These control how much the dash increases the player's speed, the duration of the dash, whether their position updates, & their most recent direction.
     public float boostSpeed = 10f;
-    public float dashTime = 0.5f;
+    public float dashTime = 0.08f;
     public float baseGravity;
     [HideInInspector] public bool dashing = false;
     [HideInInspector] public float savedDirection = 1; //Positive goes right, negative goes left.
@@ -142,18 +142,25 @@ void Awake()
     {
         if (collision.gameObject.CompareTag("Boost")) //Looking for dash orbs.
         {
-            float tempGravity = 0.8f;
             rb.linearVelocity = new Vector2(0, 0); //Resets velocity to avoid inconsistency.
-            rb.gravityScale = tempGravity; //Decreases gravity to keep dash horizontal, though still nice-looking.
+            rb.gravityScale = 0f; //Decreases gravity to keep dash horizontal, though still nice-looking.
             rb.linearVelocity = new Vector2(savedDirection * boostSpeed, rb.linearVelocity.y);
             dashing = true; //Prevents FixedUpdate from updating the player's velocity while dashing.
-            StartCoroutine(Wait(dashTime)); //Prevents velocity and gravity from being returned to normal for 0.8 seconds so the dash is unempeeded.
+            StartCoroutine(Wait(dashTime)); //Prevents velocity and gravity from being returned to normal for 0.8 seconds so the dash is unimpeded.
         }
     }
     
     private IEnumerator Wait(float secs) //Use of IEnumerator gleaned from: https://discussions.unity.com/t/how-waitforseconds-works-in-c/447105/19
     {
-        yield return new WaitForSeconds(secs);
+        float speedDecreaser = 0.8f; //What boostSpeed is multiplied by to slow the dash down smoothly.
+        yield return new WaitForSeconds(secs); //Waits once here to remain at max speed for longer than the slowdown times.
+        while (speedDecreaser >= 0.4f)
+        {
+            yield return new WaitForSeconds(secs);
+            rb.linearVelocity = new Vector2(savedDirection * (boostSpeed * speedDecreaser), rb.linearVelocity.y);
+            speedDecreaser -= 0.2f;
+            rb.gravityScale += 0.5f; //Allows the player to very gradually drop for more smoothness.
+        }
         rb.gravityScale = baseGravity; //3f.
         dashing = false;
     }
