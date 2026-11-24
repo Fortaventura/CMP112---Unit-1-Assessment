@@ -668,7 +668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   gameOverScript: {fileID: 1692866716}
   Player: {fileID: 46772914}
-  level: 2
+  level: 1
 --- !u!4 &1010507778
 Transform:
   m_ObjectHideFlags: 0
