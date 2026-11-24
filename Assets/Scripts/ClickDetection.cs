@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class ClickDetection : MonoBehaviour
 {
-
     public void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -15,9 +14,7 @@ public class ClickDetection : MonoBehaviour
 
     public GameObject winMessage;
     
-    
     public GameObject deathMessage;
-    
     
     public GameObject retryButton;
 

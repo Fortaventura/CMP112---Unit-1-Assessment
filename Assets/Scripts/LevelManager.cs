@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
 
-        LoadLevel(2);
+        LoadLevel(level);
     }
 
     public void RetryLevel()
@@ -43,13 +43,12 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 1.0f;
 
         SceneManager.LoadScene("Level" + level);
-
-
     }
 
     public void LoadNextLevel()
     {
-        SceneManager.LoadScene("Level" + (level + 1));
+        SceneManager.LoadScene("Level" + level);
+        LoadLevel(level);
     }
     
     public void Died()

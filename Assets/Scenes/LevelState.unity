@@ -1264,7 +1264,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   LevelManager: {fileID: 1010507777}
   deathMessage: {fileID: 346529238}
-  retryButton: {fileID: 1083267596}
   winMessage: {fileID: 1724226117}
 --- !u!114 &1692866717
 MonoBehaviour:
