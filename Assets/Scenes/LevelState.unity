@@ -631,11 +631,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9201a49963fbe469bb56b5a13fd125d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  PlayerMovement: {fileID: 0}
-  winMessage: {fileID: 0}
-  deathMessage: {fileID: 0}
-  retryButton: {fileID: 0}
-  Player: {fileID: 0}
+  PlayerMovement: {fileID: 46772917}
+  winMessage: {fileID: 1724226117}
+  deathMessage: {fileID: 346529238}
+  retryButton: {fileID: 1083267596}
+  Player: {fileID: 46772914}
 --- !u!1 &1010507776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,7 +1123,6 @@ GameObject:
   - component: {fileID: 1634966245}
   - component: {fileID: 1634966244}
   - component: {fileID: 1634966248}
-  - component: {fileID: 1634966249}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1232,18 +1231,6 @@ MonoBehaviour:
   deathMessage: {fileID: 1433122885}
   retryButton: {fileID: 1083267596}
   Player: {fileID: 46772914}
---- !u!114 &1634966249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1634966243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2a61c00b973843839d223f5688dc847, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LevelTransfers
 --- !u!1 &1692866715
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,6 +1264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   LevelManager: {fileID: 1010507777}
   deathMessage: {fileID: 346529238}
+  retryButton: {fileID: 1083267596}
   winMessage: {fileID: 1724226117}
 --- !u!114 &1692866717
 MonoBehaviour:

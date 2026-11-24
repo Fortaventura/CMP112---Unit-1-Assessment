@@ -33,8 +33,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
 
     //These control how much the dash increases the player's speed, the duration of the dash, whether their position updates, & their most recent direction.
-    public float boostSpeed = 1f;
-    public float dashTime = 0.01f;
+    public float boostSpeed = 0.5f;
+    public float dashTime = 0.6f;
     [HideInInspector] public bool dashing = false;
     [HideInInspector] public float savedDirection = 1; //Positive goes right, negative goes left.
 
@@ -130,7 +130,8 @@ void Awake()
     {
         if (collision.gameObject.CompareTag("Boost")) //Looking for dash orbs.
         {
-            rb.linearVelocity += new Vector2(savedDirection * boostSpeed, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(0, 0);
+            rb.linearVelocity = new Vector2(savedDirection * boostSpeed, rb.linearVelocity.y);
             dashing = true; //Prevents FixedUpdate from updating the player's velocity while dashing.
             StartCoroutine(Wait(dashTime));
         }

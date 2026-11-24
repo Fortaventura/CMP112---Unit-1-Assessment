@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: 9201a49963fbe469bb56b5a13fd125d9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - PlayerMovement: {instanceID: 0}
+  - winMessage: {instanceID: 0}
+  - deathMessage: {instanceID: 0}
+  - retryButton: {fileID: 3668996930435399763, guid: 774ac75cf21e23d4990464ab6ed3020e, type: 3}
+  - Player: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -3,7 +3,6 @@ using TMPro;
 using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
-//using System.Diagnostics;
 
 public class ClickDetection : MonoBehaviour
 {
