@@ -29,10 +29,9 @@ public class GameOverScript : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Retry()
-    {
-        //gameObject.SetActive(false);
-        LevelManager.RetryLevel();
-        Debug.Log("This reloads the level");
-    }
+    //public void Retry()
+    //{
+    //    LevelManager.RetryLevel();
+    //    Debug.Log("This reloads the level");
+    //}
 }

@@ -33,11 +33,11 @@ public class LevelManager : MonoBehaviour
     {
         if (level == 1)
         {
-        Player.transform.position = new Vector2 (-10, -7);
+            Player.transform.position = new Vector2 (-10, -7);
         }
         else
         {
-         Player.transform.position = new Vector2 (11, -6);   
+            Player.transform.position = new Vector2 (11, -6);   
         }
         gameOverScript.Hide();
         Time.timeScale = 1.0f;

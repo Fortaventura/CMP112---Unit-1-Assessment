@@ -1,5 +1,6 @@
 //using System.Numerics;
 //using System.Diagnostics;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
@@ -25,16 +26,17 @@ public class PlayerMovement : MonoBehaviour
 
     public int stillness = 0; //This was intended to be used for friction to gradually slow down the player. But it's scope creep :/
 
-    //Defining the speed of the player and how high they can jump
-    [SerializeField] private float JumpForce = 5f;
+    //Defining the speed of the player and how high they can jump.
+    [SerializeField] private float JumpForce = 12f;
     [SerializeField] private float speed = 4f;
 
     //This creates a new mask for the ground, that is used to prevent in-air jumping using raycasting later on.
     [SerializeField] private LayerMask groundMask;
 
-    //These control how much the dash increases the player's speed, the duration of the dash, whether their position updates, & their most recent direction.
-    public float boostSpeed = 0.5f;
-    public float dashTime = 0.6f;
+    //These control how much the dash increases the player's speed, the duration of the dash, the gravity prior to being changed, whether their position updates, & their most recent direction.
+    public float boostSpeed = 10f;
+    public float dashTime = 0.5f;
+    public float baseGravity;
     [HideInInspector] public bool dashing = false;
     [HideInInspector] public float savedDirection = 1; //Positive goes right, negative goes left.
 
@@ -46,7 +48,10 @@ void Awake()
         MovementInputActions = new MovementInputActions();
 
         //Defines the rigidbody(2D) component for the player
-        rb = gameObject.GetComponent<Rigidbody2D>();    
+        rb = gameObject.GetComponent<Rigidbody2D>();
+
+        //baseGravity is assigned here, as the rigidbody is needed before it can be properly set.
+        baseGravity = rb.gravityScale;
 
         //Adds the path of inputs for jumping, so that the inputs are accepted
         MovementInputActions.Moving.Jumping.performed += OnJump;
@@ -63,12 +68,12 @@ void Awake()
         MovementInputActions.Disable();
     }
 
-    void Update()   //Gets the player movement value (left, right or null) from the added input paths, and detects jump inputs
+    void Update()   //Gets the player movement value (left, right or null) from the added input paths, and detects jump inputs.
     {
         movement = MovementInputActions.Moving.Movement.ReadValue<Vector2>();
        
         if (Input.GetButtonDown("Jump") && OnGround())
-        { //The jump input is ONLY performed if the player is on the ground when the input is detected. This is checked through the OnGround function (Line 97)
+        { //The jump input is ONLY performed if the player is on the ground when the input is detected. This is checked through the OnGround function.
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
         }
     }
@@ -81,6 +86,14 @@ void Awake()
             if (movement.x != 0)
             { //Saves whether the player was most recently moving left or right.
                 savedDirection = movement.x; //For moving in the correct direction for dashing.
+                if (savedDirection < 0) //Makes sure that savedDirection is either -1, 0, or 1.
+                {
+                    savedDirection = -1;
+                }
+                else if (savedDirection > 0)
+                {
+                    savedDirection = 1;
+                }
             }
         }
     }
@@ -114,13 +127,12 @@ void Awake()
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-
         if (collision.gameObject.CompareTag("Spikes"))
-        {
+        { //Activates the "You Died!" screen and button if you touch a hazard.
             LevelManager.Died();
         }
         else if (collision.gameObject.CompareTag("Door"))
-        {
+        { //Activates the "Well Done!" screen and button if you touch an exit door.
             LevelManager.Completed();
             //LevelManager.LoadNextLevel();
         }
@@ -130,16 +142,19 @@ void Awake()
     {
         if (collision.gameObject.CompareTag("Boost")) //Looking for dash orbs.
         {
-            rb.linearVelocity = new Vector2(0, 0);
+            float tempGravity = 0.8f;
+            rb.linearVelocity = new Vector2(0, 0); //Resets velocity to avoid inconsistency.
+            rb.gravityScale = tempGravity; //Decreases gravity to keep dash horizontal, though still nice-looking.
             rb.linearVelocity = new Vector2(savedDirection * boostSpeed, rb.linearVelocity.y);
             dashing = true; //Prevents FixedUpdate from updating the player's velocity while dashing.
-            StartCoroutine(Wait(dashTime));
+            StartCoroutine(Wait(dashTime)); //Prevents velocity and gravity from being returned to normal for 0.8 seconds so the dash is unempeeded.
         }
     }
     
     private IEnumerator Wait(float secs) //Use of IEnumerator gleaned from: https://discussions.unity.com/t/how-waitforseconds-works-in-c/447105/19
     {
         yield return new WaitForSeconds(secs);
+        rb.gravityScale = baseGravity; //3f.
         dashing = false;
     }
 }
